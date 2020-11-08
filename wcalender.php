@@ -8,15 +8,24 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/87c0ff4c0f.js" crossorigin="anonymous"></script>
-
+    
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Indie+Flower&family=Itim&display=swap');
+
+
         body{
             margin: 0;
             padding: 0;
+            background-image:url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80');
+            /* background-image:url('https://images.unsplash.com/photo-1496167117681-944f702be1f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80'); */
+            background-size:100%;
         }
 
         table{
-            width: 770px;
+            width: 300px;
             margin: auto;
             margin-top: 30px;
             border: 1px solid darksalmon;
@@ -25,25 +34,99 @@
 
         table td{
             width: 110px;
-            border: 1px solid darksalmon;
+            border: 1px solid transparent;
             padding: 10px 0;
             text-align: center;
         }
         
         .dis01{
             margin: auto;
-            width: 750px;
+            width: 300px;
             display: flex;
             justify-content: space-between;
 
         }
 
+        .weekday{
+            border:1px docted #333;
+            border-collapse:separate;
+
+        }
+
+        .container{
+            margin-top:150px;
+            position:relative;
+            display:flex;
+            justify-content:space-between;
+            border:1px solid  transparent;
+            border-radius:60px;
+            padding:30px;
+            background-color:#FEFEFE;
+
+        }
+
+        .box1{
+            margin:0;
+            border:1px solid transparent;
+            border-radius:60px;
+            background-image:url('https://images.unsplash.com/photo-1470790376778-a9fbc86d70e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=649&q=80');
+            background-repeat:no-repeat;
+            background-size:cover;
+            width:49%;
+            height:750px;
+
+        }
+
+        .box2{
+            margin:0;           
+            border:1px solid transparent;
+            width:49%;
+            height:750px;
+
+        }
+
+        .weekend{
+
+            color:red;
+        }
+
+        .weekday{
+            font-family: 'Itim', cursive;
+        }
+
+
+        .pyear{
+
+            font-family: 'Indie Flower', cursive;
+            font-size:3rem;
+            line-height:36px;
+            font-weight:1000;
+            color:#1A3A32;
+            }
+        
+        h1{
+            font-family: 'Itim', cursive;
+            /* text-decoration:underline;   */
+            font-weight:600;
+        }
+        .pmonth{
+
+            font-family: 'Caveat', cursive;
+            font-size:2.5rem;
+            line-height:36px;
+        }
     </style>
     
 
 </head>
 <body> 
-        <?php
+
+<div class="container">
+        <div class="box1">
+
+        </div>
+        <div class="box2">
+            <?php
         
         $thismonth=date("m");
         $thismonthday=date("t");
@@ -81,29 +164,67 @@
         ?>
 
 
-        <h1 style="text-align:center" class="text-success my-3">Perpetual calendar</h1>
+        <h1 style="text-align:center" class="my-3">Perpetual calendar</h1>
        
-        <span><p class="text-center"><?php
+        <span><p class="text-center pyear"><?php
             echo $thisyear;
-        ?>年</span></p>
-        
-        <span><p class="text-center"><?php
-            echo $thismonth;
-        ?>月份</span></p>
+        ?></span></p>
+        <hr>
+        <span><p class="text-center pmonth" ><?php
+            switch($thismonth){
+                case 1;
+                echo "January";
+                break;  
+                case 2;
+                echo "February";
+                break;  
+                case 3;
+                echo "March";
+                break;  
+                case 4;
+                echo "April";
+                break;  
+                case 5;
+                echo "May";
+                break;  
+                case 6;
+                echo "June";
+                break;  
+                case 7;
+                echo "July";
+                break;  
+                case 8;
+                echo "August";
+                break;  
+                case 9;
+                echo "September";
+                break;  
+                case 10;
+                echo "October";
+                break;  
+                case 11;
+                echo "November";
+                break;  
+                case 12;
+                echo "December";
+                break;  
+            }
+
+        ?></span></p>
 
         <div class="dis01">
-        <a href="wcalender.php?year=<?=$preyear;?>&month=<?=$prevmonth;?>"><button ><i class="fas fa-angle-double-left"></i></button></a>
-        <a href="wcalender.php?year=<?=$nextyear;?>&month=<?=$nextmonth;?>"><button><i class="fas fa-angle-double-right"></i></button></a>
+        <a href="wcalender.php?year=<?=$preyear;?>&month=<?=$prevmonth;?>"><button class="btn-secondary"><<</button></a>
+        <a href="wcalender.php?year=<?=$nextyear;?>&month=<?=$nextmonth;?>"><button class="btn-secondary">>></button></a>
         </div>
     <table>
     <tr>
-        <td class="bg-info">一</td>
-        <td class="bg-info">二</td>
-        <td class="bg-info">三</td>
-        <td class="bg-info">四</td>
-        <td class="bg-info">五</td>
-        <td class="bg-info">六</td>
-        <td class="bg-info">日</td>
+        <td class="weekday">MON</td>
+        <td class="weekday">TUE</td>
+        <td class="weekday">WED</td>
+        <td class="weekday">THU</td>
+        <td class="weekday">FRI</td>
+        <td class="weekday weekend">SAT</td>
+        <td class="weekday weekend">SUN</td>
     </tr>
 
         <div>
@@ -162,5 +283,7 @@
                 }
         ?>
     </table>
+    </div>
+    </div>
 </body>
 </html>
