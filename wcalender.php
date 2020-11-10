@@ -69,8 +69,9 @@
 
         .box1{
             margin:0;
-            border:1px solid transparent;
+            /* border:3px dotted #7F989E; */
             border-radius:60px;
+            box-shadow: 3px 4px 12px 0px #7A7567;
             background: url(
                 '<?php $a=array('https://images.unsplash.com/photo-1509114397022-ed747cca3f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 'https://images.unsplash.com/photo-1509697452888-7cdcf2c98813?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
@@ -164,13 +165,13 @@
         }
 
         .hi_1{
-            left:600px;
-            top:0;
+            left:250px;
+            top:-50px;
         }
         .hi_2{
             
-            right:600px;
-            top:0;
+            right:250px;
+            top:-50px;
         }
 
         .m_1,.m_2{
@@ -186,12 +187,12 @@
         }
 
         .m_1{
-            left:635px;
-            top:53px;
+            left:285px;
+            top:-3px;
         }
         .m_2{
-            right:635px;
-            top:53px;
+            right:285px;
+            top:-3px;
         }
 
         .under_word{
@@ -211,33 +212,88 @@
 
             display:flex;
             position:absolute;
-            right:80px;
             z-index:10;
-            bottom:10px;
-            transform:scale(1.2,1.2);
+            right:-180px;
+            bottom:-100px;
+            transform:scale(0.8,0.8);
             overflow:visible;
 
         }
 
-        /* .smoke{
+        .everyholiday{
+            
+            
+            display: flex;
+            flex-direction:column;
+            position:absolute;
+            text-align:left;
+            margin: 0;
+            color: #1A3A32;
+            z-index: 11;
+            font-weight: 800;
+            font-size: 1.1rem;
+            font-family: 'Itim', cursive;
+            /* text-align:center; */
+            top:150PX;
+            left:110PX;
+
+        }
+
+        .smoke{
+            /* background:#333; */
+            z-index:11;
+            width:0px;
+            height:100px;
             display:flex;
             position:absolute;
-            right:300px;
-            z-index:11;
-            bottom:400px;
-            width: 30px; height: 100px;
-            background-image: linear-gradient(68deg, rgba(255,255,255,1) 0%, rgba(154,154,154,1) 28%, rgba(249,249,249,1) 49%, rgba(147,147,147,1) 69%, rgba(111,111,111,1) 100%);
-            transform-origin: 60%,35% ;
-            transform:skew(.312rad) ;
+            right:90px;
+            bottom:180px;
+            transform:scale(0.2,1.4);
+            animation-name:smoke_down;
+            animation-duration:2s;
+            animation-fill-mode:forwards;
+            transition-timing-function: ease;
+            animation-iteration-count:infinite;
+        }
 
-        } */
+        @keyframes smoke_down{
+            from{       
+                transform:translate(0) rotate(0) scale(0.3,2);
+            }
+            40%{
+                transform:translateY(-90px) rotate(5deg) scale(0.3,2.6);
+            }
+
+            50%{
+                transform:translateY(-90px) rotate(3deg) scale(0.3,2.6);
+            }
+
+            75%{
+                transform:translateY(-90px) rotate(3deg) scale(0.3,2.6);
+                opacity:0;
+            }
+
+            100%{
+                opacity:0;
+            }
+        }
+
+
+        .forpd{
+
+            padding:0;
+            margin:0;
+
+        }
+
     </style>
     
-
+   
 </head>
 <body> 
-        <div class="smoke"></div>
-        <div class="coffee_cup"><img src="http://pngimg.com/uploads/cup/cup_PNG1964.png" > </div>
+        <!-- <span class="under_word">It's all for myself to live better!</span> -->
+
+    <div class="container">
         <div class="m_1"></div>
         <div class="m_2"></div>
         <div class="hi_1">
@@ -245,11 +301,7 @@
         <div class="hi_2">
         </div>
 
-        <!-- <span class="under_word">It's all for myself to live better!</span> -->
-
-    <div class="container">
         <div class="box1">
-
         </div>
         <div class="box2">
         <?php
@@ -338,6 +390,8 @@
 
         ?></span></p>
 
+
+
         <div class="dis01">
         <a href="wcalender.php?year=<?=$preyear;?>&month=<?=$prevmonth;?>"><button class="btn-secondary"><<</button></a>
         <a href="wcalender.php?year=<?=$nextyear;?>&month=<?=$nextmonth;?>"><button class="btn-secondary">>></button></a>
@@ -367,6 +421,9 @@
             // echo "共有".$everyweekq."週";
 
             $tep=0;
+    
+       
+
             if($startdayweek+floor($thismonthday/7)<$thismonthday && $lastdayperweek>0 )  //如果起始日+週*7<每月日數，加一週
             {$everyweekq=$everyweekq+1;}
 
@@ -382,8 +439,14 @@
                         echo "&nbsp;";  
                     }else{                                               //如果第一行就是有數字的，則直接起印數字
                         $tep=($i*7)+($j+1)-($startdayweek-1);
-                        echo $tep;
-
+                        $startdayweek_2=date("N",strtotime($thisyear."-".$thismonth."-".$tep));
+                            if(($startdayweek_2%7)==6    || ($startdayweek_2%7)==0){
+                                echo "<p class='forpd' style='color:red'>".$tep."</p>";
+                            }else{                        
+                                echo "<p class='forpd'>".$tep."</p>";
+                            // echo $tep;
+                        }
+                        
                         }
                         echo "</td>";
                         if($tep==$thismonthday){
@@ -408,8 +471,72 @@
                 }
                 }
         ?>
+
     </table>
+    <div class="everyholiday ">
+            <?php
+            switch($thismonth){
+                case 1;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."01-01"."　&loz;　"."New Year's Day</p></p>";
+                break;  
+                case 2;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."02-28"."　&loz;　"."Peace Memorial Day</p>";
+                break;      
+                case 3;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."03-08"."　&loz;　"."Women's Day</p>";
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."03-09"."　&loz;　"."Arbor Day</p>";
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."03-29"."　&loz;　"."Youth Day</p>";
+                break;  
+                case 4;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."04-04"."　&loz;　"."Children's Day</p>";
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."04-05"."　&loz;　"."Tomb Sweeping Day</p>";
+                break;  
+                case 5;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."05-01"."　&loz;　"."Labor Day</p>";
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."05-04"."　&loz;　"."Literary Day</p>";
+                $motherday=(14-$startdayweek)%7+15;
+                if($startdayweek=1){
+                    $motherday=$motherday-7;
+                }
+                $motherday_2=date("d",strtotime($thisyear."-05-".$motherday));
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."05-".$motherday_2."　&loz;　"."Mother's Day</p>";
+                break;  
+                case 6;
+                break;  
+                case 7;
+                break;  
+                case 8;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."08-08"."　&loz;　"."Father's Day</p>";
+                break;  
+                case 9;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."09-03"."　&loz;　"."Armed Forces Day</p>";
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."09-28"."　&loz;　"."Teachers' Day</p>";
+                break;  
+                case 10;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."10-25"."　&loz;　"."Taiwan Retrocession Day</p>";
+                break;  
+                case 11;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."11-12"."　&loz;　"."Sun Yat-sen's Birthday</p>";
+                break;  
+                case 12;
+                echo "<p class='btn btn-light text-left '>".$thisyear."-"."12-25"."　&loz;　"."Christmas/Constitution Day</p>";
+            
+                break;  
+            }
+
+        ?>
+            
+            </div>  
     </div>
+        <div class="smoke"><img src="images/smoke_3.png"></div>
+        <!-- <div class="smoke_2"><img src="images/smoke_3.png"></div> -->
+        <div class="coffee_cup"><img src="http://pngimg.com/uploads/cup/cup_PNG1964.png">
+
+         </div>
+
+        
     </div>
+
+
 </body>
 </html>
